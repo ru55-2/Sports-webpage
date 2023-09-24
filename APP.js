@@ -2,6 +2,19 @@ import express from 'express'
 const app = express();
 app.use(express.json());
 
+//fixing cors problems
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:5500');
+  // Add other necessary headers (e.g., methods, headers) if needed.
+  next();
+});
+
+
+
+
+
+
+
 import { creategame, updateset, getdatabase } from './API.js'
 
 
