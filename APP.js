@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 
 
 
-import { creategame, updateset, getdatabase } from './API.js'
+import { creategame, updateset, getdatabase, singlegameinfo } from './API.js'
 
 
 
@@ -40,7 +40,12 @@ app.post("/creategame",async (req,res) =>{
     const ask = await creategame(time,team1,team2,location)
     res.send(ask)
 });
-
+//get stats for a game
+app.get("/getgame/:id",async (req,res) => {
+  const matchid = req.body.id;
+  const ask = await singlegameinfo(matchid)
+  res.send(ask)
+})
 
 
 //updates the selected set

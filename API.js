@@ -28,6 +28,13 @@ export async function getdatabase() {
 }
 
 
+//function to get single game info
+export async function singlegameinfo(id){
+  const sql = `SELECT FROM volleyball.Matches WHERE MatchID =? `
+  const [res] = await pool.query(sql,[id])
+
+};
+
 
 // Function to create a game
 export async function creategame(Time, Team1, Team2, Location) {
