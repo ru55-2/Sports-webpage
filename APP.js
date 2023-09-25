@@ -41,7 +41,7 @@ app.post("/creategame",async (req,res) =>{
     res.send(ask)
 });
 //get stats for a game
-app.get("/getgame/:id",async (req,res) => {
+app.get("/getgame",async (req,res) => {
   const matchid = req.body.id;
   const ask = await singlegameinfo(matchid)
   res.send(ask)
