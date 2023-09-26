@@ -29,7 +29,15 @@ app.get("/games", async (req,res) => {
     const games = await getdatabase();
     res.send(games)
 })
-
+app.post("/checkadmin",async (req,res) => {
+  const pass = req.body.pass;
+  const usr = req.body.usr;
+  if (usr === "lciadmin" && pass === "rams2023"){
+    res.send(true)
+  }else{
+    res.send(false)
+  }
+})
 
 //create a game
 app.post("/creategame",async (req,res) =>{
