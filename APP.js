@@ -16,7 +16,7 @@ import { creategame, updateset, getdatabase, singlegameinfo } from './API.js'
 
 //delete a game
 app.delete("/delete", async (req,res) => {
-  const gameid = req.params.id;
+  const gameid = req.query.id;
   const ask = await deletegame(gameid);
   res.send(ask)
 })
