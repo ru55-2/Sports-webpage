@@ -49,6 +49,19 @@ export async function creategame(Time, Team1, Team2, Location) {
 
 
 
+//delete a game
+export async function deletegame(gameid){
+
+const sql = 'DELETE FROM volleyball.Matches WHERE MatchID = ?'
+const [res] = await pool.query(sql,[gameid])
+return 'game deleted';
+pool.end()
+}
+
+
+
+
+
 // Function to update a set
 export async function updateset(id, SET_NUM, T1S_update, T2S_update) {
   const ST1 = `S${SET_NUM}T1`;

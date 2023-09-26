@@ -12,14 +12,14 @@ app.use((req, res, next) => {
 
 
 
-
-
-
-
-
-
-
 import { creategame, updateset, getdatabase, singlegameinfo } from './API.js'
+
+//delete a game
+app.delete("/delete", async (req,res) => {
+  const gameid = req.body.id;
+  const ask = await deletegame(gameid);
+  res.send(ask)
+})
 
 
 
