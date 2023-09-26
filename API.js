@@ -32,7 +32,7 @@ export async function getdatabase() {
 export async function singlegameinfo(id){
   const sql = `SELECT * FROM volleyball.Matches WHERE MatchID = ?`
   const [res] = await pool.query(sql,[id]);
-  return [res];
+  return res[0];
   pool.end()
 };
 
