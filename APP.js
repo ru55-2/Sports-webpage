@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 
 
 
-import { creategame, updateset, getdatabase, singlegameinfo } from './API.js'
+import { creategame, updateset, getdatabase, singlegameinfo, deletegame } from './API.js'
 
 //delete a game
 app.delete("/delete", async (req,res) => {
