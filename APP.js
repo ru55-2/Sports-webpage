@@ -45,7 +45,8 @@ app.post("/creategame",async (req,res) =>{
     const team1 = req.body.team1;
     const team2 = req.body.team2;
     const location = req.body.location;
-    const ask = await creategame(time,team1,team2,location)
+    const setcount = req.body.sets;
+    const ask = await creategame(time,team1,team2,location,setcount)
     res.send(ask)
 });
 //get stats for a game

@@ -38,10 +38,10 @@ export async function singlegameinfo(id){
 
 
 // Function to create a game
-export async function creategame(Time, Team1, Team2, Location) {
-  const sql = 'INSERT INTO volleyball.Matches (MatchTime, Team1, Team2, Location) VALUES (?, ?, ?, ?)';
+export async function creategame(Time, Team1, Team2, Location, setcount) {
+  const sql = 'INSERT INTO volleyball.Matches (MatchTime, Team1, Team2, Location, setcount) VALUES (?, ?, ?, ?,?)';
 
-  const [res] = await pool.query(sql, [Time, Team1, Team2, Location]);
+  const [res] = await pool.query(sql, [Time, Team1, Team2, Location, setcount]);
 
   return 'game added';
   pool.end()
