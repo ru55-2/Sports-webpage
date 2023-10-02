@@ -1,7 +1,7 @@
 import express from 'express'
 const app = express();
 app.use(express.json());
-
+//a change
 //fixing cors problems
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
