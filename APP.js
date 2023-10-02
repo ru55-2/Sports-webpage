@@ -2,6 +2,19 @@ import express from 'express'
 const app = express();
 app.use(express.json());
 //a change
+//retarted cors problems
+const cors = require('cors');
+
+const corsOptions = {
+  origin: 'https://example.com',
+  optionsSuccessStatus: 200, // Some legacy browsers (IE11) may not handle 204
+};
+
+app.use(cors(corsOptions));
+
+
+
+
 
 
 
