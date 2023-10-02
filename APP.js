@@ -5,9 +5,19 @@ app.use(express.json());
 //retarted cors problems
 const cors = require('cors');
 
+// Define the allowed origins
+const allowedOrigins = ['http://sports.leavittservers.xyz'];
+
+// Configure CORS with allowed origins
 const corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200, // Some legacy browsers (IE11) may not handle 204
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
