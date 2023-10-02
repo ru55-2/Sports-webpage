@@ -21,10 +21,10 @@ export async function getdatabase() {
 
   const [res] = await pool.query(sql);
 
-
-
-  return res;
+  
   pool.end()
+  return res;
+
 }
 
 
@@ -32,8 +32,9 @@ export async function getdatabase() {
 export async function singlegameinfo(id){
   const sql = `SELECT * FROM volleyball.Matches WHERE MatchID = ?`
   const [res] = await pool.query(sql,[id]);
+  pool.end();
   return res[0];
-  pool.end()
+
 };
 
 
@@ -43,8 +44,9 @@ export async function creategame(Time, Team1, Team2, Location, setcount) {
 
   const [res] = await pool.query(sql, [Time, Team1, Team2, Location, setcount]);
 
+  pool.end();
   return 'game added';
-  pool.end()
+
 }
 
 
@@ -54,8 +56,8 @@ export async function deletegame(gameid){
 
 const sql = 'DELETE FROM volleyball.Matches WHERE MatchID = ?'
 const [res] = await pool.query(sql,[gameid])
+pool.end();
 return 'game deleted';
-pool.end()
 }
 
 
@@ -71,9 +73,8 @@ export async function updateset(id, SET_NUM, T1S_update, T2S_update) {
   
   await pool.query(sql, [T1S_update, T2S_update, id]);
 
-  
+  pool.end();
   return 'updated';
-  pool.end()
 }
 
 
