@@ -6,7 +6,7 @@ app.use(express.json());
 const cors = require('cors');
 
 const corsOptions = {
-  origin: 'http://sports.leavittservers.xyz',
+  origin: '*',
   optionsSuccessStatus: 200, // Some legacy browsers (IE11) may not handle 204
 };
 
