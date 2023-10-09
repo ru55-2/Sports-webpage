@@ -3,6 +3,7 @@ const app = express();
 app.use(express.json());
 //a change
 //retarted cors problems
+/*
 const cors = require('cors');
 
 // Define the allowed origins
@@ -22,8 +23,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-
-
+*/
 
 
 
@@ -32,7 +32,7 @@ app.use(cors(corsOptions));
 import { creategame, updateset, getdatabase, singlegameinfo, deletegame } from './API.js'
 
 //delete a game
-app.delete("/API/delete", async (req,res) => {
+app.delete("/delete", async (req,res) => {
   const gameid = req.query.id;
   const ask = await deletegame(gameid);
   res.send(ask)
@@ -42,11 +42,11 @@ app.delete("/API/delete", async (req,res) => {
 
 
 //gets all of the games in the data base
-app.get("/API/games", async (req,res) => {
+app.get("/games", async (req,res) => {
     const games = await getdatabase();
     res.send(games)
 })
-app.post("/API/checkadmin",async (req,res) => {
+app.post("/checkadmin",async (req,res) => {
   const pass = req.body.pass;
   const usr = req.body.usr;
   if (usr === "lciadmin" && pass === "rams2023"){
@@ -57,7 +57,7 @@ app.post("/API/checkadmin",async (req,res) => {
 })
 
 //create a game
-app.post("/API/creategame",async (req,res) =>{
+app.post("/creategame",async (req,res) =>{
     const time = req.body.time;
     const team1 = req.body.team1;
     const team2 = req.body.team2;
@@ -67,7 +67,7 @@ app.post("/API/creategame",async (req,res) =>{
     res.send(ask)
 });
 //get stats for a game
-app.post("/API/getgame",async (req,res) => {
+app.post("/getgame",async (req,res) => {
   const matchid = req.body.id;
   const ask = await singlegameinfo(matchid)
   res.send(ask)
@@ -75,7 +75,7 @@ app.post("/API/getgame",async (req,res) => {
 
 
 //updates the selected set
-app.put("/API/updategame", async (req,res)=>{
+app.put("/updategame", async (req,res)=>{
     const id = req.body.id;
     const setnum = req.body.setnum;
     const t1su = req.body.t1su;
