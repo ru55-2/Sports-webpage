@@ -42,7 +42,7 @@ app.delete("/api/delete", async (req,res) => {
 
 
 //gets all of the games in the data base
-app.get("/games", async (req,res) => {
+app.get("/api/games", async (req,res) => {
     const games = await getdatabase();
     res.send(games)
 })
