@@ -18,11 +18,9 @@ const pool = mysql.createPool({
 export { pool };
 
 // Function to get all of the stuff in the database
-export async function getRecentGames() {
-  const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  const sql = `SELECT * FROM volleyball.Matches WHERE MatchTime >= ?;`;
-  const [res] = await pool.query(sql, [oneWeekAgo.toISOString()]);
+export async function getdatabase() {
+  const sql = `SELECT * FROM volleyball.Matches WHERE match_date >= DATE_SUB(NOW(), INTERVAL 7 DAY);`;
+  const [res] = await pool.query(sql);
   return res;
 }
 
