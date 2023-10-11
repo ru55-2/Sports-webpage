@@ -19,7 +19,7 @@ export { pool };
 
 // Function to get all of the stuff in the database
 export async function getdatabase() {
-  const sql = `SELECT * FROM volleyball.Matches WHERE match_date >= DATE_SUB(NOW(), INTERVAL 7 DAY);`;
+  const sql = `SELECT * FROM volleyball.Matches WHERE MatchTime >= DATE_SUB(NOW(), INTERVAL 7 DAY);`;
   const [res] = await pool.query(sql);
   return res;
 }
