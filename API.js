@@ -21,7 +21,7 @@ export { pool };
 export async function getRecentGames() {
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  const sql = `SELECT * FROM volleyball.Matches WHERE match_date >= ?;`;
+  const sql = `SELECT * FROM volleyball.Matches WHERE MatchTime >= ?;`;
   const [res] = await pool.query(sql, [oneWeekAgo.toISOString()]);
   return res;
 }
