@@ -55,6 +55,13 @@ export async function updateset(id, SET_NUM, T1S_update, T2S_update) {
   return 'updated';
 }
 
+//function the check if an admin account exists on the server
+export async function checkadmin(adminUsr, adminPwd){
+  const name = adminUsr;
+  const password = adminPwd;
+  const sql = `SELECT COUNT(*) FROM admin_accounts.admin_users WHERE username = ? AND password = ?`;
+  await pool.query(sql,[name,password]);
+};
 
 
 

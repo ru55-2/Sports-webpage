@@ -1,35 +1,10 @@
 import express from 'express'
 const app = express();
 app.use(express.json());
-//a change
-//retarted cors problems
-/*
-const cors = require('cors');
-
-// Define the allowed origins
-const allowedOrigins = ['http://sports.leavittservers.xyz'];
-
-// Configure CORS with allowed origins
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
-
-*/
 
 
 
-
-
-import { creategame, updateset, getdatabase, singlegameinfo, deletegame } from './API.js'
+import { creategame, updateset, getdatabase, singlegameinfo, deletegame, checkadmin} from './API.js'
 
 //delete a game
 app.delete("/api/delete", async (req,res) => {
@@ -49,11 +24,8 @@ app.get("/api/games", async (req,res) => {
 app.post("/api/checkadmin",async (req,res) => {
   const pass = req.body.pass;
   const usr = req.body.usr;
-  if (usr === "lciadmin" && pass === "rams2023"){
-    res.send(true)
-  }else{
-    res.send(false)
-  }
+  const ask = await checkadmin(usr,pass);
+  res.send(ask);
 })
 
 //create a game
