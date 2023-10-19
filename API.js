@@ -60,7 +60,15 @@ export async function checkadmin(adminUsr, adminPwd){
   const name = adminUsr;
   const password = adminPwd;
   const sql = `SELECT COUNT(*) FROM admin_accounts.admin_users WHERE username = ? AND password = ?`;
-  await pool.query(sql,[name,password]);
+  try {
+    const result = await pool.query(sql,[name,password]);
+    const count = result[0].count;
+    return count > 0;
+  } catch (error) {
+    console.error("Error in checkAdmin:", error)
+    return false
+  }
+  
 };
 
 
