@@ -63,8 +63,6 @@ export async function checkadmin(adminUsr, adminPwd){
   try {
     const result = await pool.query(sql,[name,password]);
     const count = result[0][0]['COUNT(*)'];
-    console.log(result);
-    console.log(count);
     return count > 0;
   } catch (error) {
     console.error("Error in checkAdmin:", error)
