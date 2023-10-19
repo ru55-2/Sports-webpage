@@ -62,7 +62,7 @@ export async function checkadmin(adminUsr, adminPwd){
   const sql = `SELECT COUNT(*) FROM admin_accounts.admin_users WHERE username = ? AND password = ?`;
   try {
     const result = await pool.query(sql,[name,password]);
-    const count = result[0].count;
+    const count = result[0][0]['COUNT(*)'];
     console.log(result);
     console.log(count);
     return count > 0;
