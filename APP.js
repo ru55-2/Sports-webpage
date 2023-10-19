@@ -26,6 +26,7 @@ app.post("/api/checkadmin",async (req,res) => {
   const usr = req.body.usr;
   const ask = await checkadmin(usr,pass);
   res.send(ask);
+  console.log(ask);
 })
 
 //create a game
