@@ -26,6 +26,8 @@ app.post("/api/checkadmin",async (req,res) => {
   const usr = req.body.usr;
   const ask = await checkadmin(usr,pass);
   res.send(ask);
+  console.log(usr);
+  console.log(pass);
   console.log(ask);
 })
 
