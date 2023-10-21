@@ -23,7 +23,7 @@ app.post("/api/checkadmin",async (req,res) => {
 //delete a game
 app.delete("/api/basketball/delete", async (req,res) => {
   const gameid = req.query.id;
-  const ask = await deletegame(gameid);
+  const ask = await deletegameBB(gameid);
   res.send(ask)
 })
 
@@ -32,7 +32,7 @@ app.delete("/api/basketball/delete", async (req,res) => {
 
 //gets all of the games in the data base
 app.get("/api/basketball/games", async (req,res) => {
-    const games = await getdatabase();
+    const games = await getdatabaseBB();
     res.send(games)
 })
 
@@ -43,13 +43,13 @@ app.post("/api/basketball/creategame",async (req,res) =>{
     const team1 = req.body.team1;
     const team2 = req.body.team2;
     const location = req.body.location;
-    const ask = await creategame(time,team1,team2,location)
+    const ask = await creategameBB(time,team1,team2,location)
     res.send(ask)
 });
 //get stats for a game
 app.post("/api/basketball/getgame",async (req,res) => {
   const matchid = req.body.id;
-  const ask = await singlegameinfo(matchid)
+  const ask = await singlegameinfoBB(matchid)
   res.send(ask)
 })
 
@@ -59,7 +59,7 @@ app.put("/api/basketball/updategame", async (req,res)=>{
     const id = req.body.id;
     const t1su = req.body.t1su;
     const t2su = req.body.t2su;
-    const ask = await updateset(id,t1su,t2su);
+    const ask = await updatescoreBB(id,t1su,t2su);
     res.send(ask);
 
 });
