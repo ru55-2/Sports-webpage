@@ -17,6 +17,92 @@ const pool = mysql.createPool({
 // Export the pool for use in other parts of your application
 export { pool };
 
+//function the check if an admin account exists on the server
+export async function checkadmin(adminUsr, adminPwd){
+  const name = adminUsr;
+  const password = adminPwd;
+  const sql = `SELECT COUNT(*) FROM admin_accounts.admin_users WHERE username = ? AND password = ?`;
+  try {
+    const result = await pool.query(sql,[name,password]);
+    const count = result[0][0]['COUNT(*)'];
+    return count > 0;
+  } catch (error) {
+    console.error("Error in checkAdmin:", error)
+    return false
+  }
+};
+
+
+//THIS IS FOR THE BASKETBALL WEBSITE VERSION
+
+// Function to get all of the stuff in the database
+export async function getdatabaseBB() {
+  const sql = `SELECT * FROM basketball.Matches WHERE MatchTime >= DATE_SUB(NOW(), INTERVAL 7 DAY);`;
+  const [res] = await pool.query(sql);
+  return res;
+}
+
+// Function to get single game info
+export async function singlegameinfoBB(id) {
+  const sql = `SELECT * FROM basketball.Matches WHERE MatchID = ?`;
+  const [res] = await pool.query(sql, [id]);
+  return res[0];
+}
+
+// Function to create a game
+export async function creategameBB(Time, Team1, Team2, Location) {
+  const sql =
+    'INSERT INTO basketball.Matches (MatchTime, Team1, Team2, Location) VALUES (?, ?, ?, ?, ?)';
+  const [res] = await pool.query(sql, [Time, Team1, Team2, Location]);
+  return 'game added';
+}
+
+// Delete a game
+export async function deletegameBB(gameid) {
+  const sql = 'DELETE FROM basketball.Matches WHERE MatchID = ?';
+  const [res] = await pool.query(sql, [gameid]);
+  return 'game deleted';
+}
+
+// Function to update the score for a game
+export async function updatescoreBB(id, T1_score, T2_score) {
+  const sql = `UPDATE basketball.Matches SET T1S = ?, T2S = ? WHERE MatchID = ?`;
+  await pool.query(sql, [T1_score, T2_score, id]);
+  return 'updated';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//THIS IS ALL OF THE VOLLEYBALL SYSTEM
+
 // Function to get all of the stuff in the database
 export async function getdatabase() {
   const sql = `SELECT * FROM volleyball.Matches WHERE MatchTime >= DATE_SUB(NOW(), INTERVAL 7 DAY);`;
@@ -54,29 +140,6 @@ export async function updateset(id, SET_NUM, T1S_update, T2S_update) {
   await pool.query(sql, [T1S_update, T2S_update, id]);
   return 'updated';
 }
-
-//function the check if an admin account exists on the server
-export async function checkadmin(adminUsr, adminPwd){
-  const name = adminUsr;
-  const password = adminPwd;
-  const sql = `SELECT COUNT(*) FROM admin_accounts.admin_users WHERE username = ? AND password = ?`;
-  try {
-    const result = await pool.query(sql,[name,password]);
-    const count = result[0][0]['COUNT(*)'];
-    return count > 0;
-  } catch (error) {
-    console.error("Error in checkAdmin:", error)
-    return false
-  }
-};
-
-
-
-
-
-
-
-
 
 
 //syntax for creating a server query.

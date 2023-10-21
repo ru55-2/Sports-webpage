@@ -4,8 +4,98 @@ app.use(express.json());
 
 
 
-import { creategame, updateset, getdatabase, singlegameinfo, deletegame, checkadmin} from './API.js'
+import { creategame, updateset, getdatabase, singlegameinfo, deletegame, checkadmin, creategameBB, updatescoreBB, getdatabaseBB, singlegameinfoBB, deletegameBB } from './API.js'
+//CHECKING ADMIN
+//returns a true or false if the admin is in the database or not
+app.post("/api/checkadmin",async (req,res) => {
+  const pass = req.body.pass;
+  const usr = req.body.usr;
+  const ask = await checkadmin(usr,pass);
+  res.send(ask);
+})
 
+
+
+
+
+//THIS IS ALL FOR BASKETBALL
+
+//delete a game
+app.delete("/api/basketball/delete", async (req,res) => {
+  const gameid = req.query.id;
+  const ask = await deletegame(gameid);
+  res.send(ask)
+})
+
+
+
+
+//gets all of the games in the data base
+app.get("/api/basketball/games", async (req,res) => {
+    const games = await getdatabase();
+    res.send(games)
+})
+
+
+//create a game
+app.post("/api/basketball/creategame",async (req,res) =>{
+    const time = req.body.time;
+    const team1 = req.body.team1;
+    const team2 = req.body.team2;
+    const location = req.body.location;
+    const ask = await creategame(time,team1,team2,location)
+    res.send(ask)
+});
+//get stats for a game
+app.post("/api/basketball/getgame",async (req,res) => {
+  const matchid = req.body.id;
+  const ask = await singlegameinfo(matchid)
+  res.send(ask)
+})
+
+
+//updates the selected set
+app.put("/api/basketball/updategame", async (req,res)=>{
+    const id = req.body.id;
+    const t1su = req.body.t1su;
+    const t2su = req.body.t2su;
+    const ask = await updateset(id,t1su,t2su);
+    res.send(ask);
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//THIS IS ALL FOR VOLLEYBALL
 //delete a game
 app.delete("/api/volleyball/delete", async (req,res) => {
   const gameid = req.query.id;
@@ -22,13 +112,7 @@ app.get("/api/volleyball/games", async (req,res) => {
     res.send(games)
 })
 
-//returns a true or false if the admin is in the database or not
-app.post("/api/checkadmin",async (req,res) => {
-  const pass = req.body.pass;
-  const usr = req.body.usr;
-  const ask = await checkadmin(usr,pass);
-  res.send(ask);
-})
+
 
 //create a game
 app.post("/api/volleyball/creategame",async (req,res) =>{
