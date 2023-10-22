@@ -52,7 +52,7 @@ export async function singlegameinfoBB(id) {
 // Function to create a game
 export async function creategameBB(Time, Team1, Team2, Location) {
   const sql =
-    'INSERT INTO basketball.Matches (MatchTime, Team1, Team2, Location) VALUES (?, ?, ?, ?, ?)';
+    'INSERT INTO basketball.Matches (MatchTime, Team1, Team2, Location) VALUES (?, ?, ?, ?)';
   const [res] = await pool.query(sql, [Time, Team1, Team2, Location]);
   return 'game added';
 }
