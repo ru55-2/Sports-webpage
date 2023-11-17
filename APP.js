@@ -3,6 +3,17 @@ import express from 'express'
 const app = express();
 app.use(express.json());
 
+//cors BS
+const cors = require('cors');
+
+app.use(cors({
+  allowedHeaders: ['Content-Type', 'x-access-token'],
+}));
+
+
+
+
+
 
 //CHECKING ADMIN
 //returns a true or false if the admin is in the database or not
