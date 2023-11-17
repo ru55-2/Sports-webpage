@@ -63,7 +63,7 @@ export async function checkToken(token){
     const isAdmin = decoded.isAdmin;
 
     // Send isAdmin in the response
-    console.log(isAdmin)
+    console.log({isAdmin})
     return { isAdmin }
   });
 }
