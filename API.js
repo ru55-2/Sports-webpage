@@ -51,19 +51,19 @@ export async function createToken(pass, usr){
 //check if token is valid
 export async function checkToken(token){
   if (!token) {
-    return res.status(401).json({ message: 'Token is missing' });
+    return { message: 'Token is missing' }
   }
 
   jwt.verify(token, secretKey, (err, decoded) => {
     if (err) {
-      return res.status(401).json({ message: 'Token is invalid' });
+      return { message: 'Token is invalid' }
     }
 
     // Assuming your decoded payload includes information about the user's admin status
     const isAdmin = decoded.isAdmin;
 
     // Send isAdmin in the response
-    res.json({ isAdmin });
+    return { isAdmin }
   });
 }
 
