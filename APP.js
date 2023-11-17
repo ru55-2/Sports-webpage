@@ -1,11 +1,11 @@
 import express from 'express'
-const app = express();
-app.use(express.json());
-
 import cors from 'cors';
+const app = express();
+app.use(cors());
+app.use(express.json());
+import { checkToken, createToken, creategame, updateset, getdatabase, singlegameinfo, deletegame, checkadmin, creategameBB, updatescoreBB, getdatabaseBB, singlegameinfoBB, deletegameBB } from './API.js'
 
 
-app.use(cors())
 //CHECKING ADMIN
 //returns a true or false if the admin is in the database or not
 app.post("/api/checkadmin",async (req,res) => {
