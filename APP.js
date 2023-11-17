@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 //cors BS
-const cors = require('cors');
+import cors from 'cors';
 
 app.use(cors({
   allowedHeaders: ['Content-Type', 'x-access-token'],
