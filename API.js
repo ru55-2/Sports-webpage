@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+
 dotenv.config();
 
 // Create a single connection pool when the module is loaded
@@ -64,7 +65,7 @@ export async function checkToken(token){
 
     // Send isAdmin in the response
     console.log({isAdmin})
-    return { isAdmin }
+    return isAdmin
   });
 }
 
