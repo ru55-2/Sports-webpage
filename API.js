@@ -38,7 +38,7 @@ export async function createToken(pass, usr){
         // User authentication successful, generate JWT
         const isAdmin = true; // Assuming the user is an admin
         const token = jwt.sign({ username: usr, isAdmin }, secretKey);
-        return token
+        return {token}
     } else {
         return ({ error: 'Invalid credentials' })
     }
