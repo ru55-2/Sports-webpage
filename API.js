@@ -38,13 +38,13 @@ export async function createToken(pass, usr){
         // User authentication successful, generate JWT
         const isAdmin = true; // Assuming the user is an admin
         const token = jwt.sign({ username: usr, isAdmin }, secretKey);
-        return res.json({ token });
+        return token
     } else {
-        res.status(401).json({ error: 'Invalid credentials' });
+        return ({ error: 'Invalid credentials' })
     }
 } catch (error) {
     console.error('Error in checkAdmin:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    return ({error: 'Internal Server Error'})
 }
 }
 
