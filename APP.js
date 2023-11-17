@@ -3,8 +3,7 @@ const app = express();
 app.use(express.json());
 
 
-
-import { creategame, updateset, getdatabase, singlegameinfo, deletegame, checkadmin, creategameBB, updatescoreBB, getdatabaseBB, singlegameinfoBB, deletegameBB } from './API.js'
+import { checkToken, createToken, creategame, updateset, getdatabase, singlegameinfo, deletegame, checkadmin, creategameBB, updatescoreBB, getdatabaseBB, singlegameinfoBB, deletegameBB } from './API.js'
 //CHECKING ADMIN
 //returns a true or false if the admin is in the database or not
 app.post("/api/checkadmin",async (req,res) => {
@@ -12,7 +11,25 @@ app.post("/api/checkadmin",async (req,res) => {
   const usr = req.body.usr;
   const ask = await checkadmin(usr,pass);
   res.send(ask);
-})
+});
+
+
+//TOKEN SYSTEM
+
+app.post('/api/maketoken', async (req,res) => {
+  const pass = req.body.pass;
+  const usr = req.body.usr;
+  const ask = await createToken(pass,usr);
+  res.send(ask);
+});
+
+app.post('/api/checkToken', async (req,res) => {
+  const token = req.headers['x-access-token'];
+  const ask = await checkToken(token);
+  res.send(ask);
+});
+
+
 
 
 

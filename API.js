@@ -1,6 +1,9 @@
 import mysql from 'mysql2';
 import fs from 'fs';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
 dotenv.config();
 
 // Create a single connection pool when the module is loaded
@@ -16,6 +19,57 @@ const pool = mysql.createPool({
 
 // Export the pool for use in other parts of your application
 export { pool };
+
+//Token Auth Sysytem
+
+
+//create token
+const secretKey = process.env.JWT_SECRET || 'your_default_secret';
+
+export async function createToken(pass, usr){
+  try {
+    // Use Bcrypt for password hashing
+    const hashedPassword = await bcrypt.hash(pass, 10);
+    const sql = `SELECT COUNT(*) FROM admin_accounts.admin_users WHERE username = ? AND password = ?`;
+    const result = await pool.query(sql, [usr, pass]);
+    const count = result[0][0]['COUNT(*)'];
+
+    if (count > 0) {
+        // User authentication successful, generate JWT
+        const isAdmin = true; // Assuming the user is an admin
+        const token = jwt.sign({ username: usr, isAdmin }, secretKey);
+        return res.json({ token });
+    } else {
+        res.status(401).json({ error: 'Invalid credentials' });
+    }
+} catch (error) {
+    console.error('Error in checkAdmin:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+}
+
+//check if token is valid
+export async function checkToken(token){
+  if (!token) {
+    return res.status(401).json({ message: 'Token is missing' });
+  }
+
+  jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: 'Token is invalid' });
+    }
+
+    // Assuming your decoded payload includes information about the user's admin status
+    const isAdmin = decoded.isAdmin;
+
+    // Send isAdmin in the response
+    res.json({ isAdmin });
+  });
+}
+
+
+
+
 
 //function the check if an admin account exists on the server
 export async function checkadmin(adminUsr, adminPwd){
