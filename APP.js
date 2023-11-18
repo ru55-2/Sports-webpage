@@ -34,10 +34,15 @@ app.post('/api/maketoken', async (req,res) => {
   res.send(ask);
 });
 
-app.post('/api/checkToken', async (req,res) => {
+app.post('/api/checkToken', async (req, res) => {
   const token = req.headers['x-access-token'];
-  const ask = await checkToken(token);
-  res.send(ask);
+  try {
+    const result = await checkToken(token);
+    res.send(result);
+  } catch (error) {
+    console.error('Error checking token:', error);
+    res.status(500).send({ message: 'Internal Server Error' });
+  }
 });
 
 

@@ -50,22 +50,24 @@ export async function createToken(pass, usr){
 }
 
 //check if token is valid
-export async function checkToken(token){
-  if (!token) {
-    return { message: 'Token is missing' }
-  }
-
-  jwt.verify(token, secretKey, (err, decoded) => {
-    if (err) {
-      return { message: 'Token is invalid' }
+export function checkToken(token) {
+  return new Promise((resolve, reject) => {
+    if (!token) {
+      resolve({ message: 'Token is missing' });
     }
 
-    // Assuming your decoded payload includes information about the user's admin status
-    const isAdmin = decoded.isAdmin;
+    jwt.verify(token, secretKey, (err, decoded) => {
+      if (err) {
+        resolve({ message: 'Token is invalid' });
+      }
 
-    // Send isAdmin in the response
-    console.log({isAdmin})
-    return {isAdmin}
+      // Assuming your decoded payload includes information about the user's admin status
+      const isAdmin = decoded.isAdmin;
+
+      // Send isAdmin in the response
+      console.log({ isAdmin });
+      resolve({ isAdmin });
+    });
   });
 }
 
