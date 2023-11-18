@@ -32,7 +32,7 @@ export async function createToken(pass, usr){
     // Use Bcrypt for password hashing
     const hashedPassword = await bcrypt.hash(pass, 10);
     const sql = `SELECT COUNT(*) FROM admin_accounts.admin_users WHERE username = ? AND password = ?`;
-    const result = await pool.query(sql, [usr, pass]);
+    const result = await pool.query(sql, [usr, hashedPassword]);
     const count = result[0][0]['COUNT(*)'];
 
     if (count > 0) {
