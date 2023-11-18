@@ -30,7 +30,6 @@ app.post("/api/checkadmin",async (req,res) => {
 app.post('/api/maketoken', async (req,res) => {
   const pass = req.body.pass;
   const usr = req.body.usr;
-  console.log(usr,pass)
   const ask = await createToken(pass,usr);
   res.send(ask);
 });
