@@ -3,13 +3,13 @@ import express from 'express'
 const app = express();
 app.use(express.json());
 
-//cors BS
+/*cors BS
 import cors from 'cors';
 
 app.use(cors({
   allowedHeaders: ['Content-Type', 'x-access-token'],
 }));
-
+*/
 
 
 

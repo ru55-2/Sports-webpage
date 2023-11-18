@@ -65,7 +65,7 @@ export async function checkToken(token){
 
     // Send isAdmin in the response
     console.log({isAdmin})
-    return isAdmin
+    return {isAdmin}
   });
 }
 
